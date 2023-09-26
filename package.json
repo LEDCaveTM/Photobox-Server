@@ -1,0 +1,17 @@
+{
+  "name": "photobox",
+  "version": "1.0.0",
+  "description": "A server to handle video uploads and QR Code generation for a photobox/videobox installation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Timo Muessig",
+  "license": "ISC",
+  "dependencies": {
+    "better-sqlite3": "^8.6.0",
+    "express": "^4.18.2",
+    "multer": "^1.4.5-lts.1",
+    "qrcode": "^1.5.3"
+  }
+}
