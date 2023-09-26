@@ -169,7 +169,7 @@ if (DEBUGGINGENABLED){
     console.log("Requested to delete all codes from table");
     deleteCodes.run();
 
-    fs.rmSync("./uploads/", { recursive: true, force: true });
+    fs.unlinkSync("./uploads/", { recursive: true, force: true });
 
     response.status(200)
     response.send("<p>Poof! Gone!</p><br><a href='/'>Back to index</a>");
