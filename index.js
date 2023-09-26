@@ -169,10 +169,17 @@ if (DEBUGGINGENABLED){
     console.log("Requested to delete all codes from table");
     deleteCodes.run();
 
-    fs.unlinkSync("./uploads/", { recursive: true, force: true });
+    try {
+      fs.unlinkSync("./uploads/", { recursive: true, force: true });
+    } catch (error) {
+      console.log("Error while deleting download folder");
+      console.log(error);
+    }
+      
 
     response.status(200)
     response.send("<p>Poof! Gone!</p><br><a href='/'>Back to index</a>");
+    console.log();
   });
   app.get("/", (request, response) =>{
     numCodes = getNumCodes.get();
