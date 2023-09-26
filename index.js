@@ -6,6 +6,7 @@ const qrCode = require('qrcode');
 
 const DEBUGGINGENABLED = true;
 const downloadName = "Photobox_RET"
+const serverURL = "https://video.ret.de/"
 
 
 // DATABASE INITIALIZATION
@@ -54,7 +55,7 @@ app.get(["/nextCode/*"], (request, response) =>{
     response.status(200)
     response.setHeader('content-type','image/png');
     response.setHeader('content-disposition','attachment; filename="'  + lastCode.code + '.png"');
-    qrCode.toFileStream(response, "http://10.20.2.12:3000/video/" + lastCode.code);
+    qrCode.toFileStream(response, serverURL + "video/" + lastCode.code);
     console.log("Returned new code " + lastCode.code)
   }
 
@@ -70,7 +71,7 @@ app.get(["/nextCode/*"], (request, response) =>{
     response.status(200)
     response.setHeader('content-type','image/png');
     response.setHeader('content-disposition','attachment; filename="'  + lastCode.code + '.png"');
-    qrCode.toFileStream(response, "http://10.20.2.12:3000/video/" + lastCode.code);
+    qrCode.toFileStream(response, serverURL + "video/" + lastCode.code);
 
     console.log("Returned current code for ID " + numCodes.count + " with new Code " + lastCode.code);
   }
@@ -159,7 +160,7 @@ app.get(["/video/*"], (request, response) =>{
 app.get(["/qrcode/*"], (request, response) =>{
   response.setHeader('content-type','image/png');
   response.setHeader('content-disposition','attachment; filename="'  + request.params[0] + '.png"');
-  qrCode.toFileStream(response, "http://10.20.2.12:3000/video/" + request.params[0]);
+  qrCode.toFileStream(response, serverURL + "video/" + request.params[0]);
 });
 
 // DEBUG INTERFACES
@@ -167,6 +168,9 @@ if (DEBUGGINGENABLED){
   app.get(["/deleteCodes"], (request, response) =>{
     console.log("Requested to delete all codes from table");
     deleteCodes.run();
+
+    fs.rmSync("./uploads/", { recursive: true, force: true });
+
     response.status(200)
     response.send("<p>Poof! Gone!</p><br><a href='/'>Back to index</a>");
   });
