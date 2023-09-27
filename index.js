@@ -172,7 +172,7 @@ if (DEBUGGINGENABLED){
     deleteCodes.run();
 
     try {
-      fs.unlinkSync("./uploads/", { recursive: true, force: true });
+      fs.rmSync("./uploads/", { recursive: true, force: true });
     } catch (error) {
       console.log("Error while deleting download folder");
       console.log(error);
