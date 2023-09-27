@@ -89,8 +89,9 @@ app.get(["/nextCode/*"], (request, response) =>{
 // UPLOAD 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const path = `./uploads/tmp/`
-    fs.mkdirSync(path, { recursive: true })
+    console.log("Requesting upload");
+    const path = `./uploads/tmp/`;
+    fs.mkdirSync(path, { recursive: true });
     cb(null, path);
   },
   filename: (req, file, cb) => {
@@ -102,6 +103,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.post(["/upload/*/*"], upload.single('file'), (request, response) =>{
+  console.log("Processing upload");
   const id = request.params[0];
   const code = request.params[1];
   const lastCode = getLastCode.get();
