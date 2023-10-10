@@ -4,7 +4,7 @@ const PORT = process.env.PORT || 3000;
 const fs = require('fs');
 const qrCode = require('qrcode');
 
-const DEBUGGINGENABLED = true;
+const DEBUGGINGENABLED = false;
 const downloadName = "Photobox_RET"
 const serverURL = "https://video.ret.de/"
 
