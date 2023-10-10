@@ -183,15 +183,11 @@ if (DEBUGGINGENABLED){
     response.send("<p>Poof! Gone!</p><br><a href='/'>Back to index</a>");
     console.log();
   });
-  app.get("/", (request, response) =>{
-    numCodes = getNumCodes.get();
-
-    console.log("Requested index. Current row count: " + numCodes.count);
-
-    response.status(200)
-    response.send("<a href='/nextCode/" + (numCodes.count) + "'>Current Code</a><br><a href='/nextCode/" + (numCodes.count+1) + "'>Next Code</a><br></br><a href='/deleteCodes'>Delete Code Table</a>");
-  });
 }
+
+app.get("/", (request, response) =>{
+  response.redirect(301, 'https://www.guestastic.com/')
+});
 
 app.post('*', function(req, res){
   res.status(403).send("No permission to access this page");
